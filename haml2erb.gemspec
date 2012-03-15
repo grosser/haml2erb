@@ -1,6 +1,6 @@
 # -*- encoding: utf-8 -*-
 lib = File.expand_path('../lib/', __FILE__)
-$:.unshift lib unless $:.include?(lib)
+$LOAD_PATH.unshift lib unless $LOAD_PATH.include?(lib)
 
 require 'haml2erb/version'
 
@@ -14,10 +14,12 @@ Gem::Specification.new do |s|
   s.summary = 'Haml to ERB Converter'
   s.description = 'Haml to ERB Converter'
 
+  s.executables = ["haml2erb"]
+
   s.required_rubygems_version = ">= 1.3.6"
 
   s.files = `git ls-files`.split("\n")
   s.require_paths = ["lib"]
-  
+
   s.add_dependency 'mixology'
 end

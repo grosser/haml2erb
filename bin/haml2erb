@@ -1,0 +1,40 @@
+#!/usr/bin/env ruby
+$LOAD_PATH << File.join(File.dirname(__FILE__), '..', 'lib')
+require "haml2erb"
+require "optparse"
+
+options = {}
+OptionParser.new do |opts|
+  opts.banner = <<BANNER
+Convert files from haml 2 erb.
+
+Usage:
+    haml2erb app/views
+    haml2erb app/views/layouts/application.html.haml
+
+Options:
+BANNER
+  opts.on("-h", "--help", "Show this.") { puts opts; exit }
+  opts.on("-v", "--version", "Show Version"){ puts Haml2Erb::VERSION; exit}
+end.parse!
+
+exit if ARGV.empty?
+
+require "fileutils"
+
+def convert_to_erb(file)
+  output_file = file.gsub(/\.haml/, ".erb")
+  p output_file
+  File.open(output_file, "w") { |f| f.write Haml2Erb.convert(File.read(file)) }
+  FileUtils.rm_r file
+end
+
+ARGV.each do |path|
+  if File.directory?(path)
+    Dir.glob(path+"/**/*.haml").each do |file|
+      convert_to_erb(file)
+    end
+  else
+    convert_to_erb(path)
+  end
+end

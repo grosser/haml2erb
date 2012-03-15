@@ -4,40 +4,35 @@ haml2erb is a tool for converting {Haml markup}[http://haml-lang.com/] to Erb ma
 
 <b>Latest version:</b> 0.2.0
 
-* API documentation (coming soon)
 * {Source code} [http://github.com/cgoddard/haml2erb/]
 * {Bug tracker} [http://github.com/cgoddard/haml2erb/issues]
 
-Tested on Ruby 1.9.1 and Ruby 1.8.7
+Works on Ruby 1.9 and Ruby 1.8
 
-=== Installing and loading haml2erb
+=== Installing
 
-haml2erb is currently distributed as a Rails plugin.
+  gem install haml2erb
 
-Simply move the main haml2erb directory into the vendor/plugins directory of your Rails application.
+=== Using haml2erb on files & folders
 
-=== Using haml2erb
+  haml2erb app/views
 
-From the Rails console or application, call the Haml2Erb.convert method to have haml
-markup translated into erb.
+==== Using haml2erb on text
 
-==== Example: Simple conversion
   Haml2Erb.convert('.foo')
   # => "<div class='foo'>\n</div>\n"
 
-=== Not supported yet
+=== TODO (pull-requests welcome)
 
 Parsing of tag internal string interpolations, such as:
 #my_div{ class: "box #{extra_classes}" }
-
-Coming soon though ...
 
 == Licenses
 
 ==== haml2erb code and documentation (MIT license)
 
   Copyright (c) 2010 Chris Goddard
-  
+
   Permission is hereby granted, free of charge, to any person obtaining
   a copy of this software and associated documentation files (the
   "Software"), to deal in the Software without restriction, including
@@ -45,10 +40,10 @@ Coming soon though ...
   distribute, sublicense, and/or sell copies of the Software, and to
   permit persons to whom the Software is furnished to do so, subject to
   the following conditions:
-  
+
   The above copyright notice and this permission notice shall be
   included in all copies or substantial portions of the Software.
-  
+
   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
   EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
   MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
