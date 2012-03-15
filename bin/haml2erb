@@ -20,13 +20,19 @@ end.parse!
 
 exit if ARGV.empty?
 
+@errors = 0
+
 require "fileutils"
 
 def convert_to_erb(file)
   output_file = file.gsub(/\.haml/, ".erb")
-  p output_file
+  p "#{file} -> #{output_file}"
   File.open(output_file, "w") { |f| f.write Haml2Erb.convert(File.read(file)) }
   FileUtils.rm_r file
+rescue Exception => e
+  @errors += 1
+  puts "Error converting to erb"
+  puts e.inspect
 end
 
 ARGV.each do |path|
@@ -38,3 +44,5 @@ ARGV.each do |path|
     convert_to_erb(path)
   end
 end
+
+exit @errors

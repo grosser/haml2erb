@@ -54,6 +54,17 @@ describe "CLI" do
     File.read("folder/xxx.html.erb").should == "<div class='foo'>\n</div>\n"
   end
 
+  it "continues if something blows up" do
+    file = "folder/xxx.html.haml"
+    file2 = "folder/zzz.html.haml"
+    write(file, "%img#foo{src: fuu(@bar)}")
+    write(file2, ".foo")
+    result = run "haml2erb folder", :fail => true
+    result.should include("Error converting to erb")
+    File.exist?(file).should == true
+    File.exist?(file2).should == false
+  end
+
   it "converts a folder with trailing slash" do
     file = "folder/xxx.html.haml"
     write(file, ".foo")
